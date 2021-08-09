@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EuroCarsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="model" Type="varchar" MaxLength="50" />
+          <Property Name="colour" Type="varchar" MaxLength="50" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SalesHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="10" />
+          <Property Name="VehiclesSold" Type="int" />
+          <Property Name="CarsId" Type="int" />
+        </EntityType>
+        <Association Name="FK_SalesHistory_Cars">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SalesHistory" Type="Self.SalesHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SalesHistory">
+              <PropertyRef Name="CarsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EuroCarsModelStoreContainer">
+          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesHistory" EntityType="Self.SalesHistory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SalesHistory_Cars" Association="Self.FK_SalesHistory_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="SalesHistory" EntitySet="SalesHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EuroCarsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="colour" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SalesHistories" Relationship="Self.FK_SalesHistory_Cars" FromRole="Cars" ToRole="SalesHistory" />
+        </EntityType>
+        <EntityType Name="SalesHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VehiclesSold" Type="Int32" />
+          <Property Name="CarsId" Type="Int32" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_SalesHistory_Cars" FromRole="SalesHistory" ToRole="Cars" />
+        </EntityType>
+        <Association Name="FK_SalesHistory_Cars">
+          <End Role="Cars" Type="Self.Car" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SalesHistory" Type="Self.SalesHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SalesHistory">
+              <PropertyRef Name="CarsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EuroCarsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cars" EntityType="Self.Car" />
+          <EntitySet Name="SalesHistories" EntityType="Self.SalesHistory" />
+          <AssociationSet Name="FK_SalesHistory_Cars" Association="Self.FK_SalesHistory_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="SalesHistory" EntitySet="SalesHistories" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EuroCarsModelStoreContainer" CdmEntityContainer="EuroCarsEntities">
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="EuroCarsModel.Car">
+              <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="colour" ColumnName="colour" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesHistories">
+            <EntityTypeMapping TypeName="EuroCarsModel.SalesHistory">
+              <MappingFragment StoreEntitySet="SalesHistory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="VehiclesSold" ColumnName="VehiclesSold" />
+                <ScalarProperty Name="CarsId" ColumnName="CarsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

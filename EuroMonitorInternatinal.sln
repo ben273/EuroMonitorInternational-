@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuroMonitorInternatinal", "EuroMonitorInternatinal\EuroMonitorInternatinal.csproj", "{8779AA3B-9C02-4CDF-BB81-469C414724BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuroMonitorInternatinal.Tests", "EuroMonitorInternatinal.Tests\EuroMonitorInternatinal.Tests.csproj", "{4A4A86CF-645D-434D-A0CB-7DDE677E3CE1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8779AA3B-9C02-4CDF-BB81-469C414724BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8779AA3B-9C02-4CDF-BB81-469C414724BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8779AA3B-9C02-4CDF-BB81-469C414724BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8779AA3B-9C02-4CDF-BB81-469C414724BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A4A86CF-645D-434D-A0CB-7DDE677E3CE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A4A86CF-645D-434D-A0CB-7DDE677E3CE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A4A86CF-645D-434D-A0CB-7DDE677E3CE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A4A86CF-645D-434D-A0CB-7DDE677E3CE1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17F7EF10-9831-4BD8-8115-205A8F49393C}
+	EndGlobalSection
+EndGlobal

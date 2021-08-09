@@ -1,0 +1,36 @@
+﻿@model List<SelectListItem>
+
+@{
+    ViewBag.Title = "GetModelSales";
+}
+
+<h2>Model Sales</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+          Model Name
+        </th>
+        <th>
+           Total Sales
+        </th>
+        
+        <th></th>
+    </tr>
+
+@for (int item = 0; item < Model.Count(); item++) 
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(model => Model[item].Text)
+        </td>
+        <td>
+            @Html.DisplayFor(model => Model[item].Value)
+        </td>
+        
+       
+    </tr>
+}
+
+</table>
