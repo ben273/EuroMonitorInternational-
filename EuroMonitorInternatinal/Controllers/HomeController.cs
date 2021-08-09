@@ -13,6 +13,14 @@ namespace EuroMonitorInternatinal.Controllers
             return RedirectToAction("GetModelSales","Cars");
         }
 
-        
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }

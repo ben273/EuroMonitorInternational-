@@ -90,8 +90,8 @@ namespace EuroMonitorInternatinal.Controllers
                 EuroCarsEntities db = new EuroCarsEntities();
                 var cars = db.Cars.GroupBy(x => x.Manufacturer).Count();
                 var query = (from sale in db.SalesHistories
-                             where sale.CarsId != null
-                             select sale.VehiclesSold);
+                             where sale.CarsId != null && sale.Year != null
+                             select sale.VehiclesSold) ;
                 {
 
                     sum = query.Sum();
@@ -111,12 +111,12 @@ namespace EuroMonitorInternatinal.Controllers
             try
             {
                 EuroCarsEntities db = new EuroCarsEntities();
-                var most = (from i in db.Cars
-                            group i by i into grp
+                var cars = (from car in db.Cars                            
+                            group car by car into grp                           
                             orderby grp.Count() descending
                             select grp.Key).First();
                 {
-                    ViewBag.colour = most.colour;
+                    ViewBag.colour = cars.colour;
                 }
                 return View();
             }
